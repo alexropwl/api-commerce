@@ -13,6 +13,7 @@ import com.alexandre.api.domain.Categoria;
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
 
+
 @RequestMapping(method=RequestMethod.GET)	
 public List<Categoria> listar() {
 	
