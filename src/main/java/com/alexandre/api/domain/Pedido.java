@@ -2,6 +2,8 @@ package com.alexandre.api.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -33,6 +36,8 @@ private Pagamento pagamento;
 @JoinColumn(name="cliente_id")
 private Cliente cliente;
 
+@OneToMany(mappedBy="id.pedido")
+private Set<ItemPedido>itens = new HashSet<>();
 
 @ManyToOne
 @JoinColumn(name="endereco_entrega_id")
@@ -102,6 +107,14 @@ public Endereco getEnderecoEntrega() {
 public void setEnderecoEntrega(Endereco enderecoEntrega) {
 	this.enderecoEntrega = enderecoEntrega;
 }
+public Set<ItemPedido> getItens() {
+	return itens;
+}
+
+
+public void setItens(Set<ItemPedido> itens) {
+	this.itens = itens;
+}
 
 
 @Override
@@ -129,6 +142,8 @@ public boolean equals(Object obj) {
 		return false;
 	return true;
 }
+
+
 
 
 

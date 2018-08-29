@@ -13,6 +13,7 @@ import com.alexandre.api.domain.Cidade;
 import com.alexandre.api.domain.Cliente;
 import com.alexandre.api.domain.Endereco;
 import com.alexandre.api.domain.Estado;
+import com.alexandre.api.domain.ItemPedido;
 import com.alexandre.api.domain.Pagamento;
 import com.alexandre.api.domain.PagamentoComBoleto;
 import com.alexandre.api.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.alexandre.api.repositories.CidadeRepository;
 import com.alexandre.api.repositories.ClienteRepository;
 import com.alexandre.api.repositories.EnderecoRepository;
 import com.alexandre.api.repositories.EstadoRepository;
+import com.alexandre.api.repositories.ItemPedidoRepository;
 import com.alexandre.api.repositories.PagamentoRepository;
 import com.alexandre.api.repositories.PedidoRepository;
 import com.alexandre.api.repositories.ProdutoRepository;
@@ -56,6 +58,8 @@ public class ApiApplication implements CommandLineRunner {
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
 	
+	@Autowired
+	private ItemPedidoRepository itemPeditoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiApplication.class, args);
@@ -146,6 +150,32 @@ public class ApiApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		
 		pagamentoRepository.saveAll(Arrays.asList(pgto1, pgto2));
+		
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2.000);
+		
+		ItemPedido ip2 = new ItemPedido(ped2, p3, 0.00, 2, 5.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1));
+		
+		ped2.getItens().addAll(Arrays.asList(ip2));
+		
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		
+		
+		
+		itemPeditoRepository.saveAll(Arrays.asList(ip1,ip2));
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
